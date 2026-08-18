@@ -1,0 +1,35 @@
+=========================================
+NyayaAI Proof of Concept (PoC) Results
+=========================================
+
+[1] FAIRNESS AUDIT (Adult Income Dataset)
+-----------------------------------------
+Model Goal: Predict whether income exceeds $50K/yr based on census data.
+Audit Focus: Gender Bias
+
+Metrics Calculated (using Fairlearn):
+- Overall Accuracy:           84.72%
+- Demographic Parity Diff:    0.1736 (Significant disparity detected)
+- Demographic Parity Ratio:   0.3580 
+- Equalized Odds Difference:  0.0839
+
+Finding: The model heavily favors 'Male' applicants over 'Female' applicants in its predictions. This violates MeitY AI Guidelines (Sutra 3: Fairness & Non-discrimination).
+
+
+[2] EXPLAINABILITY AUDIT (Loan Approval Model)
+-----------------------------------------
+Model Goal: Approve or reject personal loan applications.
+Explanation Tool: SHAP (SHapley Additive exPlanations)
+
+Sample Audit for Citizen ID: DEC-2026-05-18-7G4SK (Dataset Index: 0)
+- Profile: Age 22, Income ₹25,000, Credit Score 580, Loan Amount ₹20,000
+- AI Decision: REJECTED
+
+Why was this decision made? (SHAP Factors):
+The AI started at a baseline approval probability, but the decision was pushed to REJECTED due to the following factors:
+
+1. Low Income (₹25,000):   SHAP Impact = -0.26 (High Impact)
+2. Low Age (22):           SHAP Impact = -0.20 (Medium Impact)
+3. Poor Credit Score (580): SHAP Impact = -0.19 (Medium Impact)
+
+Conclusion: The rejection was mathematically driven by valid financial indicators (Income & Credit Score), meaning this specific decision was likely FAIR and explainable under DPDP Section 11.
