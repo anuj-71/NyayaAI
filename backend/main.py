@@ -46,6 +46,11 @@ def get_metrics():
     metrics = run_fairness_audit()
     return metrics
 
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "service": "NyayaAI Backend"}
+
 @app.get("/explain/{decision_id}")
 def explain_decision(decision_id: str):
     """Runs SHAP explainability on a specific decision."""

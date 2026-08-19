@@ -1,6 +1,6 @@
 // API Service for NyayaAI connecting to FastAPI Backend
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8000';
 
 export interface AuditResult {
   status: 'pending' | 'completed';

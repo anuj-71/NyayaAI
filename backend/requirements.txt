@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+scikit-learn
+pandas
+numpy
+shap
+fairlearn
+joblib
+
+# Optional for running in constrained environments
+python-multipart
